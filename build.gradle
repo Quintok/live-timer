@@ -27,6 +27,12 @@ dependencies {
     testCompile 'junit:junit:4.+'
 }
 
+appengine {
+    appcfg {
+        oauth2 = true
+    }
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.5'
 }
