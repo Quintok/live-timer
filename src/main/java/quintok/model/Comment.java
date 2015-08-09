@@ -1,13 +1,17 @@
 package quintok.model;
 
-public class Comment {
-    private final String author;
-    private final String comment;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    public Comment(String author, String comment) {
-        this.author = author;
-        this.comment = comment;
-    }
+@Entity
+public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private String author;
+    private String comment;
 
     public String getAuthor() {
         return author;
@@ -15,5 +19,13 @@ public class Comment {
 
     public String getComment() {
         return comment;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

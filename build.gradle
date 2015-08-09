@@ -1,41 +1,39 @@
 group 'quintok'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'appengine'
-
 buildscript {
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.23'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE'
     }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-api:+'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.+'
-    providedCompile 'javax.servlet:servlet-api:2.5'
-
-    runtime 'org.slf4j:slf4j-jdk14:+'
-
-    testCompile 'junit:junit:4.+'
-}
-
-appengine {
-    appcfg {
-        oauth2 = true
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
     }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
+
+
+    testCompile("junit:junit")
 }
 
 task wrapper(type: Wrapper) {
